@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>维克科技官网</title>
+<meta name="description" content="维克科技官网：软件开发与技术服务、科研数据分析、医学科普服务、技术咨询与培训。">
+<link rel="icon" href="assets/favicon.png">
+<!-- 不引用任何外部 CDN / 字体：国内服务器部署时外链可能被墙或拖慢加载，备案审核时页面打不开会被驳回 -->
+<style>
+  :root {
+    --bg: #07090f;
+    --bg-2: #0d111a;
+    --surface: #121826;
+    --surface-2: #171f30;
+    --border: rgba(255,255,255,0.08);
+    --border-strong: rgba(255,255,255,0.16);
+    --text: #e8edf5;
+    --text-muted: #8a96a8;
+    --text-dim: #5d6879;
+    /* 以下颜色取自 logo（vic-mark-ondark.svg） */
+    --accent: #2bb8f0;
+    --accent-2: #66d6f7;
+    --accent-3: #6e88cc;
+    --accent-glow: rgba(43,184,240,0.25);
+    --radius: 14px;
+    --max: 1180px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+  .container { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- 导航 ---------- */
+  header {
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(7,9,15,0.82);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand img { width: 40px; height: 41px; }
+  .brand-divider { width: 1px; height: 30px; background: var(--border-strong); }
+  .brand-name { font-size: 20px; font-weight: 900; letter-spacing: 2px; line-height: 1.3; }
+  .brand-sub { font-size: 9px; color: var(--text-dim); letter-spacing: 3px; font-family: "SF Mono", Menlo, Consolas, monospace; }
+  .nav-links { display: flex; gap: 34px; font-size: 15px; color: var(--text-muted); }
+  .nav-links a { transition: color .2s; }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ---------- 首屏 ---------- */
+  .hero { position: relative; overflow: hidden; padding: 96px 0 104px; }
+  .hero::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      radial-gradient(600px 400px at 78% 45%, rgba(43,184,240,0.14), transparent 70%),
+      radial-gradient(500px 300px at 10% 10%, rgba(43,184,240,0.06), transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    /* 细网格背景，增加科技感 */
+    content: ""; position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 56px; align-items: center;
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; color: var(--accent-2); letter-spacing: 2px;
+    padding: 6px 14px; border: 1px solid rgba(43,184,240,0.3); border-radius: 999px;
+    background: rgba(43,184,240,0.06); margin-bottom: 24px;
+  }
+  .eyebrow::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+  .hero h1 { font-size: 50px; line-height: 1.25; font-weight: 700; margin-bottom: 22px; letter-spacing: 1px; }
+  .hero h1 .grad {
+    background: linear-gradient(90deg, #ffffff, var(--accent));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero p.lead { font-size: 18px; color: var(--text-muted); max-width: 560px; margin-bottom: 36px; }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn {
+    display: inline-block; padding: 13px 30px; border-radius: 10px; font-size: 15px; font-weight: 500;
+    transition: all .2s;
+  }
+  .btn-primary { background: var(--accent); color: #06121f; box-shadow: 0 6px 24px var(--accent-glow); }
+  .btn-primary:hover { background: var(--accent-2); }
+  .btn-ghost { border: 1px solid var(--border-strong); color: var(--text); }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+  .hero-tags { display: flex; gap: 22px; flex-wrap: wrap; margin-top: 44px; font-size: 14px; color: var(--text-muted); }
+  .hero-tags span::before { content: "✓"; color: var(--accent); margin-right: 6px; }
+  .hero-visual { position: relative; display: flex; justify-content: center; align-items: center; }
+  .hero-visual .ring {
+    position: absolute; aspect-ratio: 1; border-radius: 50%;
+    top: 50%; left: 50%; transform: translate(-50%,-50%);
+  }
+  .hero-visual .ring.r1 { width: 118%; border: 1px dashed rgba(43,184,240,0.22); animation: spin 70s linear infinite; }
+  .hero-visual .ring.r2 { width: 136%; border: 1px solid rgba(110,136,204,0.10); }
+  @keyframes spin { to { transform: translate(-50%,-50%) rotate(360deg); } }
+  .badge-logo {
+    position: relative; width: 100%; max-width: 380px; aspect-ratio: 1; border-radius: 50%;
+    display: grid; place-items: center;
+    background: radial-gradient(circle at 50% 45%, #161c27 0%, #0f1217 62%);
+    border: 1px solid var(--border-strong);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 90px rgba(43,184,240,0.18), inset 0 0 60px rgba(43,184,240,0.06);
+  }
+  .badge-logo img { width: 48%; filter: drop-shadow(0 0 22px rgba(43,184,240,0.35)); }
+
+  /* ---------- 通用区块 ---------- */
+  section { padding: 96px 0; position: relative; }
+  section.alt { background: var(--bg-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .section-head { text-align: center; max-width: 680px; margin: 0 auto 56px; }
+  .section-head .kicker { font-size: 13px; letter-spacing: 4px; color: var(--accent); margin-bottom: 10px; }
+  .section-head h2 { font-size: 34px; font-weight: 700; margin-bottom: 12px; }
+  .section-head p { color: var(--text-muted); font-size: 16px; }
+
+  /* ---------- 关于我们 ---------- */
+  .about { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+  .about-text p { color: var(--text-muted); font-size: 16px; }
+  .about-text p + p { margin-top: 18px; }
+  .about-text strong { color: var(--text); font-weight: 600; }
+  .pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .pillar {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 24px 22px;
+  }
+  .pillar .num { font-size: 13px; color: var(--accent); letter-spacing: 2px; margin-bottom: 6px; font-family: "SF Mono", Menlo, Consolas, monospace; }
+  .pillar h4 { font-size: 17px; margin-bottom: 4px; }
+  .pillar p { font-size: 13px; color: var(--text-muted); }
+
+  /* ---------- 业务卡片 ---------- */
+  .services { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .service {
+    position: relative; overflow: hidden;
+    background: linear-gradient(180deg, var(--surface) 0%, var(--bg-2) 100%);
+    border: 1px solid var(--border); border-radius: 18px; padding: 36px 32px;
+    transition: border-color .25s, transform .25s;
+  }
+  .service:hover { border-color: rgba(43,184,240,0.4); transform: translateY(-3px); }
+  .service::after {
+    content: ""; position: absolute; top: -80px; right: -80px; width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(43,184,240,0.12), transparent 70%);
+  }
+  .service .icon {
+    width: 52px; height: 52px; border-radius: 12px;
+    display: grid; place-items: center; margin-bottom: 22px;
+    background: rgba(43,184,240,0.08); border: 1px solid rgba(43,184,240,0.25); color: var(--accent);
+  }
+  .service h3 { font-size: 21px; margin-bottom: 10px; }
+  .service > p { font-size: 15px; color: var(--text-muted); margin-bottom: 18px; }
+  .service ul { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; }
+  .service li { font-size: 14px; color: var(--text); position: relative; padding-left: 16px; }
+  .service li::before { content: ""; position: absolute; left: 0; top: 10px; width: 6px; height: 6px; border-radius: 2px; background: var(--accent); opacity: .8; }
+  .service.featured { grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+  .service.featured .badge {
+    display: inline-block; font-size: 12px; padding: 3px 10px; border-radius: 999px; margin-bottom: 14px;
+    background: rgba(43,184,240,0.12); color: var(--accent-2); letter-spacing: 1px;
+  }
+
+  /* 软件服务子项 */
+  .soft-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .soft-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 18px; }
+  .soft-item h5 { font-size: 15px; margin-bottom: 4px; color: var(--accent-2); }
+  .soft-item p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+  /* ---------- 服务流程 ---------- */
+  .steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; position: relative; }
+  .steps::before {
+    content: ""; position: absolute; top: 27px; left: 10%; right: 10%; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(43,184,240,0.5), transparent);
+  }
+  .step { text-align: center; padding: 0 12px; position: relative; }
+  .step .dot {
+    width: 56px; height: 56px; border-radius: 50%; margin: 0 auto 18px;
+    display: grid; place-items: center; font-weight: 700; font-size: 18px;
+    background: var(--bg); border: 1px solid rgba(43,184,240,0.45); color: var(--accent);
+    box-shadow: 0 0 22px var(--accent-glow);
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+  }
+  .step h4 { font-size: 17px; margin-bottom: 6px; }
+  .step p { font-size: 13px; color: var(--text-muted); }
+
+  /* ---------- 技术能力 & 服务对象 ---------- */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 34px 32px; }
+  .panel h3 { font-size: 20px; margin-bottom: 6px; }
+  .panel > p { font-size: 14px; color: var(--text-muted); margin-bottom: 22px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 10px; }
+  .tag {
+    font-size: 13px; padding: 7px 14px; border-radius: 8px;
+    background: rgba(255,255,255,0.04); border: 1px solid var(--border-strong); color: var(--text);
+  }
+  .audience { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .aud { display: flex; gap: 12px; align-items: flex-start; padding: 14px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); }
+  .aud svg { flex-shrink: 0; color: var(--accent); margin-top: 3px; }
+  .aud h5 { font-size: 15px; }
+  .aud p { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+  /* ---------- 服务理念 ---------- */
+  .values { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .value {
+    text-align: center; padding: 44px 28px; border-radius: 18px;
+    background: radial-gradient(circle at 50% 0%, rgba(43,184,240,0.1), transparent 70%), var(--surface);
+    border: 1px solid var(--border);
+  }
+  .value .big {
+    font-size: 40px; font-weight: 700; margin-bottom: 8px; letter-spacing: 6px;
+    background: linear-gradient(180deg, #fff, var(--accent)); -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .value .en { font-size: 12px; letter-spacing: 4px; color: var(--text-dim); margin-bottom: 14px; }
+  .value p { font-size: 14px; color: var(--text-muted); }
+
+  /* ---------- 联系我们：纯文字展示，不放表单（纯展示站不应有用户提交功能） ---------- */
+  .contact-wrap {
+    display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 40px; align-items: center;
+    background: linear-gradient(135deg, var(--surface-2), var(--surface));
+    border: 1px solid var(--border-strong); border-radius: 22px; padding: 48px;
+  }
+  .contact-wrap h2 { font-size: 30px; margin-bottom: 10px; }
+  .contact-wrap .intro { color: var(--text-muted); font-size: 15px; }
+  .contact-list { display: grid; gap: 14px; }
+  .contact-item {
+    display: flex; align-items: center; gap: 16px; padding: 18px 20px; border-radius: 12px;
+    background: rgba(0,0,0,0.25); border: 1px solid var(--border);
+  }
+  .contact-item .ci-icon { width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; background: rgba(43,184,240,0.1); color: var(--accent); flex-shrink: 0; }
+  .contact-item .label { font-size: 12px; color: var(--text-dim); }
+  .contact-item .val { font-size: 16px; word-break: break-all; }
+
+  /* ---------- 页脚：备案号必须链接到工信部备案查询网站 ---------- */
+  footer { border-top: 1px solid var(--border); padding: 40px 0 32px; font-size: 13px; color: var(--text-dim); }
+  .footer-top { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; margin-bottom: 24px; }
+  .footer-links { display: flex; gap: 24px; color: var(--text-muted); }
+  .footer-links a:hover, .footer-bottom a:hover { color: var(--accent); }
+  .footer-bottom { text-align: center; border-top: 1px solid var(--border); padding-top: 22px; }
+  .footer-bottom p + p { margin-top: 6px; }
+
+  /* ---------- 响应式 ---------- */
+  @media (max-width: 960px) {
+    .hero-inner, .about, .two-col, .contact-wrap { grid-template-columns: 1fr; }
+    .hero-visual { order: -1; }
+    .badge-logo { max-width: 260px; }
+    .service.featured { grid-template-columns: 1fr; gap: 24px; }
+    .steps { grid-template-columns: 1fr; gap: 28px; }
+    .steps::before { display: none; }
+    .step { display: grid; grid-template-columns: 56px 1fr; gap: 0 18px; text-align: left; align-items: center; }
+    .step .dot { margin: 0; grid-row: span 2; }
+    .step h4 { margin-bottom: 0; }
+  }
+  @media (max-width: 680px) {
+    .container { padding: 0 16px; }
+    .nav-links { display: none; }
+    .hero { padding: 56px 0 64px; }
+    .hero h1 { font-size: 34px; }
+    .hero p.lead { font-size: 16px; }
+    section { padding: 64px 0; }
+    .section-head h2 { font-size: 26px; }
+    .services, .values, .pillars, .soft-grid, .audience { grid-template-columns: 1fr; }
+    .service.featured { grid-column: span 1; }
+    .service { padding: 28px 22px; }
+    .service ul { grid-template-columns: 1fr; }
+    .contact-wrap { padding: 28px 20px; }
+    .footer-top { flex-direction: column; text-align: center; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-visual .ring { animation: none; }
+    .service { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a href="#" class="brand">
+      <img src="assets/logo-mark.svg" alt="维克科技 logo"><span class="brand-divider"></span><div><div class="brand-name">维克科技</div><div class="brand-sub">VIC TECHNOLOGY</div></div>
+    </a>
+    <nav class="nav-links">
+      <a href="#about">关于我们</a>
+      <a href="#services">业务范围</a>
+      <a href="#process">服务流程</a>
+      <a href="#values">服务理念</a>
+      <a href="#contact">联系我们</a>
+    </nav>
+  </div>
+</header>
+
+<!-- 首屏 -->
+<div class="hero">
+  <div class="container hero-inner">
+    <div>
+      <div class="eyebrow">科研技术服务</div>
+      <h1>以信息技术<br><span class="grad">助力科研效率提升</span></h1>
+      <p class="lead">维克科技专注于科研技术服务领域，以信息技术和数据分析能力，为高校、科研机构及科研人员提供专业、高效的技术支持。</p>
+      <div class="hero-actions">
+        <a href="#services" class="btn btn-primary">了解业务</a>
+        <a href="#contact" class="btn btn-ghost">联系我们</a>
+      </div>
+      <div class="hero-tags">
+        <span>软件定制开发</span>
+        <span>科研数据分析</span>
+        <span>医学科普服务</span>
+        <span>技术咨询培训</span>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="ring r1"></div>
+      <div class="ring r2"></div>
+      <div class="badge-logo"><img src="assets/logo-mark.svg" alt="维克科技 logo"></div>
+    </div>
+  </div>
+</div>
+
+<!-- 关于我们 -->
+<section id="about" class="alt">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">ABOUT US</div>
+      <h2>关于维克科技</h2>
+    </div>
+    <div class="about">
+      <div class="about-text">
+        <p><strong>维克科技</strong>是一家专注于科研技术服务领域的科技企业，致力于以信息技术和数据分析能力，为高校、科研机构及科研人员提供专业、高效的技术支持。</p>
+        <p>公司围绕<strong>软件开发与技术服务、科研数据分析、医学科普服务、技术咨询与培训</strong>四大方向开展业务，秉持"专业、严谨、高效"的理念，以技术驱动科研效率提升，与客户共同成长。</p>
+      </div>
+      <div class="pillars">
+        <div class="pillar"><div class="num">01</div><h4>软件开发</h4><p>定制开发、部署与运维</p></div>
+        <div class="pillar"><div class="num">02</div><h4>数据分析</h4><p>整理、统计与可视化</p></div>
+        <div class="pillar"><div class="num">03</div><h4>医学科普服务</h4><p>图文、动画及视频内容</p></div>
+        <div class="pillar"><div class="num">04</div><h4>咨询培训</h4><p>方法、工具与软件应用</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 业务范围 -->
+<section id="services">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">SERVICES</div>
+      <h2>业务范围</h2>
+      <p>围绕科研场景，提供从软件开发到数据分析的一站式技术服务</p>
+    </div>
+
+    <div class="services">
+      <!-- 软件服务为核心业务，单独做成通栏 -->
+      <div class="service featured">
+        <div>
+          <span class="badge">核心业务</span>
+          <div class="icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <h3>软件开发与技术服务</h3>
+          <p>面向科研场景，提供数据管理系统、统计分析工具、信息化平台等软件的定制开发、部署与运维服务，帮助团队把重复性工作交给系统，把精力留给研究本身。</p>
+        </div>
+        <div class="soft-grid">
+          <div class="soft-item"><h5>数据管理系统</h5><p>科研数据的采集、录入、存储与权限管理</p></div>
+          <div class="soft-item"><h5>统计分析工具</h5><p>常用分析流程的工具化与自动化</p></div>
+          <div class="soft-item"><h5>信息化平台</h5><p>面向团队协作的 Web 平台定制开发</p></div>
+          <div class="soft-item"><h5>部署与运维</h5><p>系统上线部署、版本迭代与技术支持</p></div>
+        </div>
+      </div>
+
+      <div class="service">
+        <div class="icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </div>
+        <h3>科研数据分析</h3>
+        <p>协助客户完成科研数据的整理、统计分析与可视化呈现，提供符合学术规范的分析报告与图表。</p>
+        <ul>
+          <li>数据清洗与整理</li>
+          <li>统计方法选择</li>
+          <li>可视化图表制作</li>
+          <li>分析报告撰写</li>
+        </ul>
+      </div>
+
+      <div class="service">
+        <div class="icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"/><polygon points="10 8 15 11 10 14 10 8"/><line x1="8" y1="21" x2="16" y2="21"/></svg>
+        </div>
+        <h3>医学科普服务</h3>
+        <p>将专业知识转化为通俗易懂的图文、动画及视频内容，助力科学知识的规范传播。</p>
+        <ul>
+          <li>图文内容策划</li>
+          <li>动画视频制作</li>
+          <li>示意图绘制</li>
+          <li>脚本与配音</li>
+        </ul>
+      </div>
+
+      <div class="service featured">
+        <div>
+          <div class="icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>技术咨询与培训</h3>
+          <p>围绕科研方法、数据分析工具及软件应用，提供专业咨询与培训服务，帮助团队建立可持续的技术能力。</p>
+        </div>
+        <div class="soft-grid">
+          <div class="soft-item"><h5>科研方法咨询</h5><p>研究设计与分析思路的梳理</p></div>
+          <div class="soft-item"><h5>分析工具培训</h5><p>常用统计与可视化工具的上手培训</p></div>
+          <div class="soft-item"><h5>软件应用培训</h5><p>交付系统的使用与管理培训</p></div>
+          <div class="soft-item"><h5>技术方案评估</h5><p>信息化建设方案的选型与评估</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 服务流程 -->
+<section id="process" class="alt">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">PROCESS</div>
+      <h2>服务流程</h2>
+      <p>规范、透明的交付流程，确保每一个项目稳步推进</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="dot">01</div><h4>需求沟通</h4><p>深入了解业务场景与目标</p></div>
+      <div class="step"><div class="dot">02</div><h4>方案设计</h4><p>制定技术方案与实施计划</p></div>
+      <div class="step"><div class="dot">03</div><h4>开发实施</h4><p>按里程碑推进并同步进度</p></div>
+      <div class="step"><div class="dot">04</div><h4>测试交付</h4><p>完整测试后交付成果</p></div>
+      <div class="step"><div class="dot">05</div><h4>持续支持</h4><p>运维保障与迭代优化</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 技术能力 & 服务对象 -->
+<section>
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">CAPABILITIES</div>
+      <h2>技术能力与服务对象</h2>
+    </div>
+    <div class="two-col">
+      <div class="panel">
+        <h3>技术能力</h3>
+        <p>覆盖数据处理、统计分析、软件开发与内容制作的完整技术栈</p>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">R 语言</span>
+          <span class="tag">统计建模</span>
+          <span class="tag">数据可视化</span>
+          <span class="tag">Web 应用开发</span>
+          <span class="tag">数据库设计</span>
+          <span class="tag">云端部署</span>
+          <span class="tag">自动化流程</span>
+          <span class="tag">动画制作</span>
+          <span class="tag">信息图设计</span>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>服务对象</h3>
+        <p>为不同类型的科研与教育机构提供定制化服务</p>
+        <div class="audience">
+          <div class="aud">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            <div><h5>高等院校</h5><p>院系、实验室与课题组</p></div>
+          </div>
+          <div class="aud">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="9" y1="6" x2="15" y2="6"/><line x1="9" y1="10" x2="15" y2="10"/><line x1="9" y1="14" x2="15" y2="14"/></svg>
+            <div><h5>科研机构</h5><p>研究院所与科研平台</p></div>
+          </div>
+          <div class="aud">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
+            <div><h5>科研人员</h5><p>个人研究者与研究生</p></div>
+          </div>
+          <div class="aud">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+            <div><h5>企事业单位</h5><p>有信息化需求的组织</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 服务理念 -->
+<section id="values" class="alt">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">VALUES</div>
+      <h2>服务理念</h2>
+    </div>
+    <div class="values">
+      <div class="value"><div class="big">专业</div><div class="en">PROFESSIONAL</div><p>深耕科研技术服务，以扎实的技术能力解决实际问题</p></div>
+      <div class="value"><div class="big">严谨</div><div class="en">RIGOROUS</div><p>遵循学术与工程规范，确保每一项交付的质量</p></div>
+      <div class="value"><div class="big">高效</div><div class="en">EFFICIENT</div><p>以信息化手段优化流程，切实提升科研工作效率</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 联系我们 -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-wrap">
+      <div>
+        <div class="section-head" style="text-align:left;margin:0 0 12px;"><div class="kicker">CONTACT</div></div>
+        <h2>联系我们</h2>
+        <p class="intro">如需了解业务详情，欢迎通过以下方式与我们取得联系。</p>
+      </div>
+      <div class="contact-list">
+        <!-- TODO: 替换为真实联系方式 -->
+        <div class="contact-item">
+          <div class="ci-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <div><div class="label">联系电话</div><div class="val">【电话】</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22 6 12 13 2 6"/></svg></div>
+          <div><div class="label">电子邮箱</div><div class="val">【邮箱】</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div><div class="label">公司地址</div><div class="val">【地址】</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <a href="#" class="brand">
+        <img src="assets/logo-mark.svg" alt="维克科技 logo"><span class="brand-divider"></span><div><div class="brand-name">维克科技</div><div class="brand-sub">VIC TECHNOLOGY</div></div>
+      </a>
+      <div class="footer-links">
+        <a href="#about">关于我们</a>
+        <a href="#services">业务范围</a>
+        <a href="#process">服务流程</a>
+        <a href="#contact">联系我们</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© <span id="year">2026</span> 维克科技 版权所有</p>
+      <!-- TODO: 备案通过后填入真实备案号；链接地址是工信部要求的，不要改 -->
+      <p><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">【备案号，如：X ICP备XXXXXXXX号-1】</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
